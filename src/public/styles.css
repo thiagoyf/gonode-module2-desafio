@@ -167,6 +167,25 @@ body {
   background: #c15858;
 }
 
+.main-wrapper .content a.back {
+  margin-top: 30px;
+  background: #de6d6d;
+  text-decoration: none;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 14px;
+  border: 0;
+  color: #fff;
+}
+
+.main-wrapper .content a.back:hover {
+  background: #c15858;
+}
+
 .main-wrapper .content p {
   font-size: 14px;
   color: #666;
