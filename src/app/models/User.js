@@ -26,5 +26,12 @@ module.exports = (sequelize, DataTypes) => {
     return bcrypt.compare(password, this.password_hash)
   }
 
+  // deleta o campo password antes de transformar em json
+  User.prototype.toJSON = function () {
+    const values = Object.assign({}, this.get())
+    delete values.password_hash
+    return values
+  }
+
   return User
 }

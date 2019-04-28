@@ -1,0 +1,12 @@
+{% extends "schedule/index.njk" %}
+
+{% block schedule %}
+  {% for appointment in appointments %}
+    <li class="provider">
+      <div>
+        <img src="/files/{{ appointment.user.avatar }}" />
+        <strong>{{ appointment.user.name }} <br> {{ appointment.hour }}</strong>
+      </div>
+    </li>
+  {% endfor %}
+{% endblock %}

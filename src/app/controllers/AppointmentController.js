@@ -1,5 +1,4 @@
 const { User, Appointment } = require('../models')
-const moment = require('moment')
 
 class AppointmentController {
   async create (req, res) {
@@ -20,46 +19,6 @@ class AppointmentController {
     })
 
     return res.redirect('/app/dashboard')
-  }
-
-  async list (req, res) {
-    const { user } = req.session
-
-    if (user.provider) {
-      const appointments = []
-
-      await Appointment.findAll({
-        where: {
-          provider_id: user.id
-        },
-        order: ['date']
-      }).map(async a => {
-        const { name, avatar } = await User.findByPk(a.user_id)
-        appointments.push({
-          date: moment(a.date).format('DD/MM/YYYY hh:mm:ss'),
-          person: { name, avatar }
-        })
-      })
-
-      return res.render('appointments/list', { appointments })
-    }
-
-    const appointments = []
-
-    await Appointment.findAll({
-      where: {
-        user_id: user.id
-      },
-      order: [['date', 'ASC']]
-    }).map(async a => {
-      const { name, avatar } = await User.findByPk(a.provider_id)
-      appointments.push({
-        date: moment(a.date).format('DD/MM/YYYY hh:mm:ss'),
-        person: { name, avatar }
-      })
-    })
-
-    return res.render('appointments/list', { appointments })
   }
 }
 
